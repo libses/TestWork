@@ -25,18 +25,12 @@ namespace WindowsFormsApp12
         
         public void OpenFile(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
             var filePath = string.Empty;
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.RestoreDirectory = true;
-
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    filePath = openFileDialog.FileName;
-
                     var fileStream = openFileDialog.OpenFile();
                     using (var reader = new StreamReader(fileStream))
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))

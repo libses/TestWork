@@ -11,7 +11,6 @@ namespace WindowsFormsApp12
         Polygon polygon;
         Vector point;
         Random random;
-        public Model() { random = new Random(); }
         public Model(Polygon poly, Vector vector)
         {
             polygon = poly;
@@ -37,42 +36,28 @@ namespace WindowsFormsApp12
                     var isPositive = line.IsPositive(crossVector, point);
                     var isBelongs = side.CheckIfCrossingBelongsToSegment(crossVector);
                     if (isBelongs && isPositive)
-                    {
                         foreach (var vert in polygon.Vertexes)
-                        {
                             if (Vector.IsAlmostEqual(crossVector, vert))
                             {
                                 isVert = true;
                                 break;
                             }
-                        }
-                    }
                     if (isVert) break;
                     if (isPositive && isBelongs)
                         counter++;
                 }
                 if (isVert) continue;
                 if (counter % 2 == 1)
-                {
                     boolList.Add(true);
-                } else
-                {
+                else
                     boolList.Add(false);
-                }
                 //на случай если точка будет очень близко к границе и не хватит точности вычислений
                 if (i > 100000)
-                {
                     boolList.Add(true);
-                }
             }
             if (boolList[0])
-            {
                 return "inside";
-            } 
-            else
-            {
-                return "outside";
-            }
+            return "outside";
         }
     }
 }
