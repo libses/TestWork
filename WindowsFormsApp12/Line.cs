@@ -47,13 +47,13 @@ namespace WindowsFormsApp12
             var beta = Main.Y;
             if (alpha == 0)
             {
-                return (vector.Y - rayStart.Y) / beta >= 0;
+                return (vector.Y - rayStart.Y) / beta > 0;
             }
             if (beta == 0)
             {
-                return (vector.X - rayStart.X) / alpha >= 0;
+                return (vector.X - rayStart.X) / alpha > 0;
             }
-            return (vector.Y - rayStart.Y) / beta >= 0 && (vector.X - rayStart.X) / alpha >= 0;
+            return (vector.Y - rayStart.Y) / beta > 0 && (vector.X - rayStart.X) / alpha > 0;
         }
     }
 }

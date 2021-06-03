@@ -98,5 +98,61 @@ namespace WindowsFormsApp12
             var model = new Model(new Polygon(list), f);
             Assert.IsTrue(model.MakeChecks() == "outside");
         }
+        [Test]
+        public void ModelTest8()
+        {
+            var list = new List<Vector>();
+            list.Add(new Vector(0, 0));
+            list.Add(new Vector(3, 1));
+            list.Add(new Vector(0, 2));
+            list.Add(new Vector(3, 3));
+            list.Add(new Vector(0, 4));
+            list.Add(new Vector(4, 4));
+            list.Add(new Vector(4, 0));
+            var model = new Model(new Polygon(list), new Vector(2, 1));
+            Assert.IsTrue(model.MakeChecks() == "outside");
+        }
+        [Test]
+        public void ModelTest9()
+        {
+            var list = new List<Vector>();
+            list.Add(new Vector(0, 0));
+            list.Add(new Vector(3, 1));
+            list.Add(new Vector(0, 2));
+            list.Add(new Vector(3, 3));
+            list.Add(new Vector(0, 4));
+            list.Add(new Vector(4, 4));
+            list.Add(new Vector(4, 0));
+            var model = new Model(new Polygon(list), new Vector(2, -1));
+            Assert.IsTrue(model.MakeChecks() == "outside");
+        }
+        [Test]
+        public void ModelTest10()
+        {
+            var list = new List<Vector>();
+            list.Add(new Vector(0, 0));
+            list.Add(new Vector(3, 1));
+            list.Add(new Vector(0, 2));
+            list.Add(new Vector(3, 3));
+            list.Add(new Vector(0, 4));
+            list.Add(new Vector(4, 4));
+            list.Add(new Vector(4, 0));
+            var model = new Model(new Polygon(list), new Vector(1, 2));
+            Assert.IsTrue(model.MakeChecks() == "inside");
+        }
+        [Test]
+        public void ModelTest11()
+        {
+            var list = new List<Vector>();
+            list.Add(new Vector(0, 0));
+            list.Add(new Vector(3, 1));
+            list.Add(new Vector(0, 2));
+            list.Add(new Vector(3, 3));
+            list.Add(new Vector(0, 4));
+            list.Add(new Vector(4, 4));
+            list.Add(new Vector(4, 0));
+            var model = new Model(new Polygon(list), new Vector(1, 0));
+            Assert.IsTrue(model.MakeChecks() == "inside");
+        }
     }
 }
