@@ -21,12 +21,21 @@ namespace WindowsFormsApp12
             B = -main.X;
             C = -A * point.X - B * point.Y;
         }
-        public Line GetLineFromSegment(Segment segment)
+        public static Line GetLineFromSegment(Segment segment)
         {
             var main = segment.MainVector;
             var point = segment.Start;
             return new Line(point, main);
         }
-        
+        public bool CheckIfParallel(Line line)
+        {
+            return Math.Abs(A * line.B - line.A * B) < 0.000001;
+        }
+        public Vector GetCrossingWithOther(Line line)
+        {
+            var x = (C * line.B - line.C * B) / (A * line.B - line.A * B);
+            var y = (A * line.C - line.A * C) / (A * line.B - line.A * B);
+            return new Vector(x, y);
+        }
     }
 }
