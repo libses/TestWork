@@ -41,7 +41,7 @@ namespace WindowsFormsApp12
         {
             return first.X * second.X + first.Y * second.Y;
         }
-        public bool IsAlmostEqual(Vector first, Vector second)
+        public static bool IsAlmostEqual(Vector first, Vector second)
         {
             return Math.Abs(first.X - second.X) < 0.000001 && Math.Abs(first.Y - second.Y) < 0.000001;
         }

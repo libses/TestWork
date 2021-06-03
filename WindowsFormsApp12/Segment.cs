@@ -38,6 +38,11 @@ namespace WindowsFormsApp12
         }
         public bool CheckIfThereCrossingWithLine(Line line)
         {
+            
+            if (line.CheckIfParallel(Line.GetLineFromSegment(this)))
+            {
+                return false;
+            }
             return CheckIfCrossingBelongsToSegment(GetCrossingVector(line));
         }
     }
