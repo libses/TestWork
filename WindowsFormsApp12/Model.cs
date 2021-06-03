@@ -11,6 +11,7 @@ namespace WindowsFormsApp12
         Polygon polygon;
         Vector point;
         Random random;
+        public Model() { random = new Random(); }
         public Model(Polygon poly, Vector vector)
         {
             polygon = poly;
