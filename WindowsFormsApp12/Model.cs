@@ -20,9 +20,12 @@ namespace WindowsFormsApp12
         }
         public string MakeChecks()
         {
+            if (polygon.Vertexes.Where(x => Vector.IsAlmostEqual(x, point)).Count() > 0) return "inside";
             var boolList = new List<bool>();
-            for (int i = 0; i < 20000; i++)
+            int i = 0;
+            while (boolList.Count == 0)
             {
+                i++;
                 var randomX = random.Next(1, 1000);
                 var randomY = random.Next(1, 1000);
                 var line = new Line(point, new Vector(randomX, randomY));
@@ -45,10 +48,8 @@ namespace WindowsFormsApp12
                         }
                     }
                     if (isVert) break;
-                    if (isPositive && isBelongs && !isVert)
-                    {
+                    if (isPositive && isBelongs)
                         counter++;
-                    }
                 }
                 if (isVert) continue;
                 if (counter % 2 == 1)
@@ -58,16 +59,19 @@ namespace WindowsFormsApp12
                 {
                     boolList.Add(false);
                 }
+                //на случай если точка будет очень близко к границе и не хватит точности вычислений
+                if (i > 100000)
+                {
+                    boolList.Add(true);
+                }
             }
-            if (boolList.All(x => x == true))
+            if (boolList[0])
             {
                 return "inside";
-            } else if (boolList.All(x => x == false))
+            } 
+            else
             {
                 return "outside";
-            } else
-            {
-                throw new Exception();
             }
         }
     }
