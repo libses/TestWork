@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,30 @@ namespace WindowsFormsApp12
         RichTextBox bigBox;
         Model model;
         List<Vector> prePolygon;
+        
+        public void OpenFile(object sender, EventArgs e)
+        {
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+
+                    var fileStream = openFileDialog.OpenFile();
+                    using (var reader = new StreamReader(fileStream))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        prePolygon = csv.GetRecords<Vector>().ToList();
+                    }
+                }
+            }
+        }
         public void LogPoly(object sender, EventArgs e)
         {
             try
@@ -75,6 +102,7 @@ namespace WindowsFormsApp12
             buttonPoint.Click += LogPoint;
             bigBox = new RichTextBox() { Dock = DockStyle.Fill };
             var csvButton = new Button() { Dock = DockStyle.Fill, Text = "Добавить из CSV" };
+            csvButton.Click += OpenFile;
             table.Controls.Add(xBoxPolygon, 0, 0);
             table.Controls.Add(yBoxPolygon, 1, 0);
             table.Controls.Add(buttonPolygon, 2, 0);
